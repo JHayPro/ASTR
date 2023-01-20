@@ -30,6 +30,11 @@ public:
 		MessageBox(NULL, _message.c_str(), _title.c_str(), MB_SETFOREGROUND);
 	}
 
+	static int displayMessageReturn(string _title, string _message)
+	{
+		return MessageBox(NULL, _message.c_str(), _title.c_str(), MB_SETFOREGROUND | MB_OKCANCEL);
+	}
+
 	static void displayMessage(string _message)
 	{
 		MessageBox(NULL, _message.c_str(), "ASTR_MESSAGE", MB_SETFOREGROUND);
@@ -80,6 +85,11 @@ public:
 		return wstring(_input.begin(), _input.end());
 	}
 
+	static string getDirectoryParent(string _path)
+	{
+		return removeAfterChar(_path, '\\');
+	}
+
 	static string getDirectory(string _path)
 	{
 		return findPrecedingToChar(_path, '\\');
@@ -95,9 +105,17 @@ public:
 		return _path.substr(_path.size() - _distance, _path.size());
 	}
 
-	static wstring getExtension(wstring _path)
+	static string getExtension(string _path)
 	{
 		return findPrecedingToChar(_path, '.');
+	}
+
+	static int countDirectories(string _path) {
+		int count = 0;
+		for (auto chr : _path)
+			if (chr == '\\')
+				count++;
+		return count;
 	}
 
 	static string vectorToString(vector<string> _vector) {
@@ -106,6 +124,10 @@ public:
 			tempSS << curString + ", ";
 		
 		return tempSS.str().substr(0, tempSS.str().size() - 2);
+	}
+
+	static string removeAfterChar(string _path, char _desChar) {
+		return _path.substr(0, _path.size() - 1 - findPrecedingToChar(_path, '\\').size());
 	}
 
 	template <typename T> static T findPrecedingToChar(T _path, char _desChar)
@@ -129,7 +151,7 @@ public:
 		T tempS;
 		int tempI;
 		for (tempI = 1; _path.at(_path.size() - tempI) != _desChar; tempI++) {}
-		return _path.substr(_path.size() - tempI + 1, _path.size() - 1);
+		return _path.substr(_path.size() , _path.size() - 1);
 	}
 
 	static bool fileContainsNumber(string _path, int _pos) {
@@ -138,6 +160,17 @@ public:
 
 	static string intToTwoDigitString(int _num) {
 		return _num > 9 ? to_string(_num) : "0" + to_string(_num);
+	}
+
+	static string quote(string _in) {
+		return "\"" + _in + "\"";
+	}
+
+	static TCHAR* toTCHAR(string _in) {
+		TCHAR* temp = new TCHAR[_in.size() + 1];
+		temp[_in.size()] = 0;
+		copy(_in.begin(), _in.end(), temp);
+		return temp;
 	}
 };
 #endif

@@ -18,7 +18,8 @@
 
 #include <windows.h>
 #include <comdef.h>
-#include <shlobj.h>
+#include <shlobj.h>]
+#include <shlwapi.h>
 
 #include <string>
 #include <sstream>
@@ -30,11 +31,13 @@
 #include <unordered_map>
 #include <vector>
 #include <array>
+#include <utility> 
 
 #include "F4SE/PluginAPI.h"
 #include "f4se_common/f4se_version.h"
 
-using namespace std;
+#pragma comment(lib, "Shlwapi.lib")
 
+using namespace std;
 #endif //PCH_H
 
