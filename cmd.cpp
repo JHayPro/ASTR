@@ -172,5 +172,12 @@ public:
 		copy(_in.begin(), _in.end(), temp);
 		return temp;
 	}
+
+	static string removeLeadingUnderscore(string _in) {
+		auto i = _in.size() - 1;
+		for (; _in.at(i) != '\\'; --i) {};
+		_in.erase(_in.begin() + i + 1);
+		return _in;
+	}
 };
 #endif

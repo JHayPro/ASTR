@@ -55,9 +55,10 @@ extern "C"
 	{
 		MusicConvertParent* MCinst = MusicConvertCreate(*pathData);
 
-		_MESSAGE(pathData->errorReport.c_str());
+		for(const auto& errorString : pathData->errorReport)
+		_MESSAGE(errorString.c_str());
 
-		if (pathData->errorReport != "") 
+		if (pathData->errorReport.size() > 0) 
 			_MESSAGE("%s loaded with warning", PLUGIN_NAME);
 		else
 			_MESSAGE("%s loaded ", PLUGIN_NAME);

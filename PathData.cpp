@@ -24,6 +24,7 @@ void PathData::findDLLPath()
 	iniPath = dataPath + "F4SE\\Plugins\\ASTR.ini";
 	iniTrackPath = dataPath + "F4SE\\Plugins\\ASTR_Music_Dir\\ASTR_Track_Settings.ini";
 	silenceTrackPath = dataPath + "F4SE\\Plugins\\ASTR_Music_Dir\\_ASTR_Assets\\silence.xwm";
+	nonReplacerInputPath = dataPath + "F4SE\\Plugins\\ASTR_Music_Dir\\_Non_Replacer_Mod_Dir\\";
 }
 
 void PathData::readInis()
@@ -95,7 +96,7 @@ void PathData::readInis()
 
 void PathData::firstTimeCheck()
 {
-	if (!path::verifyPath(inputPath) || !path::verifyPath(iniPath) || !path::verifyPath(iniTrackPath) || !path::verifyPath(silenceTrackPath))
+	if (!path::verifyPath(inputPath) || !path::verifyPath(iniPath) || !path::verifyPath(iniTrackPath) || !path::verifyPath(silenceTrackPath) || !path::verifyPath(nonReplacerInputPath))
 		message::displayErrorMessage("ASTR_Music_Dir, ASTR.ini, or ASTR_Track_Settings.ini was not found, please re-install the mod or set ASTR.ini ;First Time Install Check Success:1 to bypass this message (likely will lead to other errors)");
 	rebuildIniFlag = true;
 
